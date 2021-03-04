@@ -14,7 +14,14 @@ class CreateSpendMoneyTable extends Migration
     public function up()
     {
         Schema::create('spend_money', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_spend_money');
+            $table->double('subtotal_amount');
+            $table->double('grandtotal_amount');
+            $table->integer('spend_for');
+            $table->text('memo');
+            $table->integer('userin');
+            $table->integer('usermod');
+            $table->smallInteger('display');
             $table->timestamps();
         });
     }

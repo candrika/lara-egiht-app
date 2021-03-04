@@ -14,7 +14,14 @@ class CreatePurchaseItemTable extends Migration
     public function up()
     {
         Schema::create('purchase_item', function (Blueprint $table) {
-            $table->id();
+            $table->increments('idpurchaseitems');
+            $table->integer('idpurchase');
+            $table->integer('product_id');
+            $table->double('price');
+            $table->integer('qty');
+            $table->integer('userin');
+            $table->integer('usermod');
+            $table->smallInteger('display');
             $table->timestamps();
         });
     }

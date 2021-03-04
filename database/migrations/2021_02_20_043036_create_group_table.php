@@ -14,7 +14,13 @@ class CreateGroupTable extends Migration
     public function up()
     {
         Schema::create('group', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_group');
+            $table->char('grupname',50);
+            $table->smallInteger('create');
+            $table->smallInteger('read');
+            $table->smallInteger('update');
+            $table->smallInteger('delete');
+            $table->smallInteger('display')->default(null);
             $table->timestamps();
         });
     }

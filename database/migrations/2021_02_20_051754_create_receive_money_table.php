@@ -14,7 +14,14 @@ class CreateReceiveMoneyTable extends Migration
     public function up()
     {
         Schema::create('receive_money', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id_receive_money');
+            $table->double('subtotal_amount');
+            $table->double('grandtotal_amount');
+            $table->integer('receive_from');
+            $table->text('memo');
+            $table->integer('userin');
+            $table->integer('usermod');
+            $table->smallInteger('display');
             $table->timestamps();
         });
     }

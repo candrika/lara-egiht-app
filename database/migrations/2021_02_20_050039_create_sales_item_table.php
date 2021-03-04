@@ -14,7 +14,14 @@ class CreateSalesItemTable extends Migration
     public function up()
     {
         Schema::create('sales_item', function (Blueprint $table) {
-            $table->id();
+            $table->increments('idsalesitems');
+            $table->integer('idsales');
+            $table->integer('product_id');
+            $table->double('price');
+            $table->integer('qty');
+            $table->integer('userin');
+            $table->integer('usermod');
+            $table->smallInteger('display');
             $table->timestamps();
         });
     }

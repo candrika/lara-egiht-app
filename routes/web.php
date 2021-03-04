@@ -19,4 +19,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/','App\Http\Controllers\LoginController@index');
+//user guest
+Route::get('/','App\Http\Controllers\LoginController@index')->name('login');
+Route::post('/login/auth','App\Http\Controllers\LoginController@loginAuth');
+Route::get('/logout','App\Http\Controllers\LoginController@logout');
+Route::get('/make/hash','App\Http\Controllers\LoginController@hash');
+
+//user 
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/dashboard','App\Http\Controllers\dashboardController@index');
+});
