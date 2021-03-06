@@ -20,8 +20,16 @@ class LoginController extends Controller
     
     public function index(){
         
-        $company = DB::table('company')->first();
-        return view('login',['company'=>$company]);
+        $company = DB::table('company');
+        $company_arr =[];
+
+        if($company->count() > 0){
+            $company_arr = $company->first();
+            return view('login',['company'=>$company_arr]);
+        }else{
+            return view('login',['company'=>$company_arr]);
+        }
+        //
     }
 
     public function loginAuth(Request $request){
@@ -52,18 +60,53 @@ class LoginController extends Controller
                         ])
                         ->get();
                         
-        dd(\Auth::attempt([
-            'email'=>$data['username'],
-            'password'=>$data['password']
-        ]));
+        // dd(\Auth::attempt([
+        //     'username'=>$data['username'],
+        //     'password'=>$data['password']
+        // ]));
+        // die;
+        return view('dashboard');
+        // return redirect()->route('dashboard');
     }
 
-    public function hash(){
-        echo Hash::make('123456');
+    public function createUser(){
+       return view('user_regis');
+    }
+
+    public function userRegister(Request $request){
+
+        $roles = [
+            'realname'=>'required|string',
+            'username'=>'required|min:6',
+            'password'=>'required|min:6|string',
+            'password_comfirmed'=>'required|min:6|string'
+        ];
+
+        $message = [
+            'realname.require'=>'username tidak boleh kosong',
+            'username.require'=>'username tidak boleh kosong',
+            'password.require'=>'username tidak boleh kosong',
+            'password_comfirmed.require'=>'password tidak boleh kosong'
+        ];
+
+        $this->validate($request,$roles,$message);
+
+        $user = new User;
+
+        $user->realname   = $request->realname;
+        $user->username   = $request->username;
+        $user->created_at = date('Y-m-d');
+        $user->updated_at = null;
+        $user->username   = $request->username;
+        $user->password   = Hash::make($request->password);
+
+        $user->save();
+
+        return redirect()->route('login');
     }
 
     public function logout(){
-        // Auth::loguot();
-        // return redirect()->redirect('/');
+        Auth::logout();
+        return redirect('/');
     }
 }

@@ -23,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','App\Http\Controllers\LoginController@index')->name('login');
 Route::post('/login/auth','App\Http\Controllers\LoginController@loginAuth');
 Route::get('/logout','App\Http\Controllers\LoginController@logout');
-Route::get('/make/hash','App\Http\Controllers\LoginController@hash');
+Route::get('/create/user/','App\Http\Controllers\LoginController@createUser')->name('regis');
+Route::post('user/register','App\Http\Controllers\LoginController@userRegister')->name('user.regis');
 
 //user 
 Route::group(['middleware'=>'auth'],function(){
-    Route::get('/dashboard','App\Http\Controllers\dashboardController@index');
+    Route::get('/dashboard','App\Http\Controllers\dashboardController@index')->name('dashboard');
 });

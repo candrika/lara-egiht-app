@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  @if($company !=null)
   <title>{{$company->companyname}} | Log in</title>
+  @else
+  <title>Aplikasi Distributor | Log in</title>
+  @endif
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,7 +30,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Login</b></a>
+    <a href="#"><b>Login</b></a>
   </div>
   <div class="card">
     <div class="card-body login-card-body">
@@ -67,7 +71,7 @@
         <a href="forgot-password.html">I forgot my password</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="{{route('regis')}}" class="text-center">Register a new membership</a>
       </p>
     </div>
   </div>
